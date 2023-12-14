@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs';
+import { Observable, delay, of } from 'rxjs';
 
 import { Hero } from 'src/app/hero';
+import { MessageService } from 'src/app/message.service';
 import { HEROES } from 'src/app/mock-heroes';
 
 @Injectable({
@@ -11,13 +11,16 @@ import { HEROES } from 'src/app/mock-heroes';
 })
 export class HeroService {
 
-  constructor() { }
+  constructor(private messageService: MessageService) { }
 
   getHeroes(): Observable<Hero[]> {
     // This creates an observable that emits a single value: the array of mock
     // heroes. Using this observable is a better mock for making a web request
     // where the data will not be ready beforehand.
     const heroes = of(HEROES);
-    return heroes
+    // Adding a message when fetching heroes
+    this.messageService.add('HeroService: fetched heroes');
+    // Done
+    return heroes;
   }
 }
