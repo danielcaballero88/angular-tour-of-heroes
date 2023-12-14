@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 
 import { Hero } from 'src/app/hero'
 import { HeroService } from 'src/app/hero.service'
@@ -9,7 +9,7 @@ import { MessageService } from 'src/app/message.service'
   templateUrl: './heroes.component.html',
   styleUrls: ['./heroes.component.css'],
 })
-export class HeroesComponent {
+export class HeroesComponent implements OnInit {
   heroes: Hero[] = []
   selectedHero?: Hero
 

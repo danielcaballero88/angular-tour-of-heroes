@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 
-import { Observable, delay, of } from 'rxjs'
+import { Observable, of } from 'rxjs'
 
 import { Hero } from 'src/app/hero'
 import { MessageService } from 'src/app/message.service'
