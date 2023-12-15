@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint:eslint": "ng lint",
-    "format:prettier": "prettier --write ."
+    "format:prettier": "prettier --write .",
+    "prepare": "husky install"
   },
   "private": true,
   "dependencies": {
