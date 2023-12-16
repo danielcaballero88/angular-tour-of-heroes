@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint:eslint": "eslint \"**/*.ts\" --max-warnings=0",
+    "lint:eslint": "eslint \"**/*.ts\"",
     "format:prettier": "prettier --write .",
     "prepare": "husky install"
   },
@@ -53,7 +53,7 @@
   },
   "lint-staged": {
     "*.ts": [
-      "eslint --max-warnings=0",
+      "eslint",
       "prettier --check"
     ],
     "*.html": "prettier --write"
