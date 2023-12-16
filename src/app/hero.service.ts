@@ -4,7 +4,6 @@ import { Observable, catchError, of, tap } from 'rxjs'
 
 import { Hero } from 'src/app/hero'
 import { MessageService } from 'src/app/message.service'
-import { HEROES } from 'src/app/mock-heroes'
 
 import { HttpClient } from '@angular/common/http'
 
@@ -34,7 +33,7 @@ export class HeroService {
         // Pipe for the response (I add this comment to get the .pipe in a newline).
         .pipe(
           // tap does something and passes the values along (it taps into the observable)
-          tap(heroes => this.log(`fetched ${heroes.length} heroes`)),
+          tap((heroes: Hero[]) => this.log(`fetched ${heroes.length} heroes`)),
           // if there is an error it is catched by this operator which takes a callback a parameter,
           // so we pass the service generice error handler function, which returns a function that
           // will handle the error.
@@ -44,11 +43,10 @@ export class HeroService {
   }
 
   getHero(id: number): Observable<Hero> {
-    // For now, assume that a hero with the specified `id` always exists.
-    // Error handling will be added in the next step of the tutorial.
-    const hero = HEROES.find(h => h.id === id)! // eslint-disable-line @typescript-eslint/no-non-null-assertion
-    this.log(`fetched hero id=${id}`)
-    return of(hero)
+    return this.http.get<Hero>(`${this.heroesUrl}/${id}`).pipe(
+      tap((hero: Hero) => this.log(`fetched hero id=${hero.id}`)),
+      catchError(this.handleError<Hero>(`getHero id=${id}`)),
+    )
   }
 
   /**
